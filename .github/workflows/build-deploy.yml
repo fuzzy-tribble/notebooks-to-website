@@ -33,6 +33,12 @@ jobs:
           mkdir -p website/_notebooks
           jupyter nbconvert notebooks/*.ipynb --to html --output-dir=website/_notebooks
 
+      - name: Save build artifact for manual inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-preview
+          path: website
+
       - name: Upload site artifact
         id: upload
         uses: actions/upload-pages-artifact@v3
