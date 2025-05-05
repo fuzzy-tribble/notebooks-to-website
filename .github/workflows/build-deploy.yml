@@ -12,43 +12,37 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      artifact-name: ${{ steps.upload.outputs.artifact-name }}
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: "3.11"
+      # - name: Install dependencies
+      #   run: |
+      #     pip install nbconvert jupyter
+      # - name: Convert notebooks to HTML
+      #   run: |
+      #     mkdir -p website/_notebooks
+      #     jupyter nbconvert notebooks/*.ipynb --to html --output-dir=website/_notebooks
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
         with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: |
-          pip install nbconvert jupyter
-
-      - name: Convert notebooks to HTML
-        run: |
-          mkdir -p website/_notebooks
-          jupyter nbconvert notebooks/*.ipynb --to html --output-dir=website/_notebooks
-
-      - name: Save build artifact for manual inspection
-        uses: actions/upload-artifact@v4
-        with:
-          name: site-preview
-          path: website
-
-      - name: Upload site artifact
-        id: upload
+          source: ./website
+          destination: ./_site
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: website
 
   deploy:
-    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
