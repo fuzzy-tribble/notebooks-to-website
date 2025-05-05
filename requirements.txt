@@ -1,0 +1,14 @@
+ucimlrepo
+matplotlib
+numpy
+seaborn
+pandas
+scikit-learn
+joblib
+graphviz
+polars
+shap
+ipykernel
+ipywidgets
+jupyter
+dtreeviz
