@@ -1,0 +1,7 @@
+nbs: "notebooks/*.ipynb"
+nb_read_path: "notebooks"
+nb_write_path: "website/_notebooks"
+asset_write_path: "website/assets"
+nb_nav_top: True
+nb_nav_bottom: True
+overwrite_existing: True # overwrite existing files in _notebooks with same name

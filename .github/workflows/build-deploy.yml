@@ -17,13 +17,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      # instead of using nbconvert like this I'd like to use the fuzzy-tribble/nbconvertjkl submodule and run 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.6" #nbconvertjkl requires 3.6
       - name: Install dependencies
         run: |
-          pip install nbconvert jupyter
+          pip install nbconvertjkl --yes
       - name: Convert notebooks to HTML
         run: |
           mkdir -p website/_notebooks
