@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.6" #nbconvertjkl requires 3.6
+          python-version: "3.6.15" #nbconvertjkl requires 3.6
       - name: Install dependencies
         run: |
           pip install nbconvertjkl --yes
